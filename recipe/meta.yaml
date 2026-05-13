@@ -1,9 +1,9 @@
-context:
-  version: "0.0.5"
+{% set name = "jupyter-ai-router" %}
+{% set version = "0.0.5" %}
 
 package:
-  name: jupyter-ai-router
-  version: ${{ version }}
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/j/jupyter-ai-router/jupyter_ai_router-${{ version }}.tar.gz
