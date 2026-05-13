@@ -10,20 +10,20 @@ source:
   sha256: 6f2d199a61f7440db8d9bbd32e3f2be313622fc8e3dc5a7c54820a3f680aeec1
 
 build:
-  noarch: python
-  script: python -m pip install . -vv
+  skip: true  # [py<39]
   number: 0
+  script: python -m pip install . -vv
 
 requirements:
   host:
-    - python ${{ python_min }}.*
+    - python
     - pip
     - hatchling >=1.5.0
     - hatch-jupyter-builder >=0.5
     - hatch-nodejs-version >=0.3.2
     - jupyterlab >=4.0.0,<5
   run:
-    - python >=${{ python_min }}
+    - python
     - jupyter_server >=2.4.0,<3
     - jupyterlab-chat >=0.19.0
 
@@ -34,7 +34,7 @@ tests:
       pip_check: true
     requirements:
       run:
-        - python ${{ python_min }}.*
+        - python
 
 about:
   homepage: https://github.com/jupyter-ai-contrib/jupyter-ai-router
