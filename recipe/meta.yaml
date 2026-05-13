@@ -39,12 +39,19 @@ test:
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
 about:
-  homepage: https://github.com/jupyter-ai-contrib/jupyter-ai-router
-  summary: "The core routing layer used in Jupyter AI to process chat messages"
+  home: https://github.com/jupyter-ai-contrib/jupyter-ai-router
+  summary: The core routing layer used in Jupyter AI to process chat messages
+  description: |
+    This extension provides the foundational message routing functionality for
+    Jupyter AI. It automatically detects new chat sessions and routes messages
+    to registered callbacks based on message type (slash commands vs regular
+    messages). Extensions can register callbacks to handle specific chat events
+    without needing to manage chat lifecycle directly.
   license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE
-  documentation: https://jupyter-ai.readthedocs.io/
-  repository: https://github.com/jupyter-ai-contrib/jupyter-ai-router
+  dev_url: https://github.com/jupyter-ai-contrib/jupyter-ai-router
+  doc_url: https://jupyter-ai.readthedocs.io
 
 extra:
   recipe-maintainers:
