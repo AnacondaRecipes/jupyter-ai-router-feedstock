@@ -1,0 +1,60 @@
+{% set name = "jupyter-ai-router" %}
+{% set version = "0.0.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-','_') }}-{{ version }}.tar.gz
+  sha256: 6f2d199a61f7440db8d9bbd32e3f2be313622fc8e3dc5a7c54820a3f680aeec1
+
+build:
+  skip: true  # [py<39]
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+
+requirements:
+  host:
+    - python
+    - pip
+    - hatchling >=1.5.0
+    - hatch-jupyter-builder >=0.5
+    - hatch-nodejs-version >=0.3.2
+    - jupyterlab >=4.0.0,<5
+  run:
+    - python
+    - jupyter_server >=2.4.0,<3
+    - jupyterlab-chat >=0.19.0
+  run_constrained:
+    - jupyterlab >=4.0.0,<5
+
+test:
+  imports:
+    - jupyter_ai_router
+  requires:
+    - pip
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+
+about:
+  home: https://github.com/jupyter-ai-contrib/jupyter-ai-router
+  summary: The core routing layer used in Jupyter AI to process chat messages
+  description: |
+    This extension provides the foundational message routing functionality for
+    Jupyter AI. It automatically detects new chat sessions and routes messages
+    to registered callbacks based on message type (slash commands vs regular
+    messages). Extensions can register callbacks to handle specific chat events
+    without needing to manage chat lifecycle directly.
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  dev_url: https://github.com/jupyter-ai-contrib/jupyter-ai-router
+  doc_url: https://jupyter-ai.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - jtpio
+    - dlqqq
+    - andrii-i
